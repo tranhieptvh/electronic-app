@@ -28,9 +28,11 @@
             </header>
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <div id="app">
+                <main>
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
     </body>
 </html>
