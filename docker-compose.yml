@@ -1,0 +1,37 @@
+version: '3'
+services:
+  app:
+    container_name: electronic-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+        - "8000:8000"
+    networks:
+      - electronic-app-network
+    depends_on:
+      - db
+    command: "php artisan serve --host=0.0.0.0 --port=8000"
+
+  db:
+    container_name: electronic-database
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./docker-compose/mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - electronic-app-network
+
+networks:
+  electronic-app-network:
+      driver: bridge
+
