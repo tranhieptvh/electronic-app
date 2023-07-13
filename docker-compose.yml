@@ -8,7 +8,7 @@ services:
     volumes:
       - .:/var/www/html
     ports:
-        - "8000:8000"
+        - "8001:8000"
     networks:
       - electronic-app-network
     depends_on:
